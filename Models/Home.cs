@@ -10,6 +10,7 @@ namespace ClientServerTestApp.Models
         public IList<int> SelectedItems { get; set; }
         public IList<Category> Categories { get; set; }
         public IList<Product> Products { get; set; }
+        public string SearchString { get; set; }
 
         public Home()
         {

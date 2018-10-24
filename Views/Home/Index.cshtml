@@ -1,0 +1,53 @@
+﻿@using ClientServerTestApp.Models
+@model Home
+@{
+    ViewData["Title"] = "Home Page";
+}
+@using (Html.BeginForm("", "Home"))
+{
+<div class="btn-toolbar nl container col-md-12" role="toolbar" aria-label="Menu">
+    <button type="submit" id="submit" class="btn-group col-md-2 col-md-offset-0" formaction=@Url.Action("Delete", "Home") disabled="disabled">Delete</button>
+    <button type="submit" id="Add" class="btn-group col-md-2 col-md-offset-0" formmethod="get" formaction=@Url.Action("Create", "Home")>Add new category</button>
+</div>
+
+    <table class="table">
+        @foreach (var category in Model.Categories)
+        {
+            <tr>
+                <td>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="SelectedItems" onchange="OnChange(this)"
+                                   id="@category.Id" value="@category.Id" class="styled">
+                        </label>
+                    </div>
+                </td>
+
+                <td>
+                    <a asp-area="" asp-controller="Home" asp-action="Edit" asp-route-id="@category.Id" class="navbar-brand">@category.Name</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+@using (Html.BeginForm("Unblock", "Home", FormMethod.Post, new { id = "cancelForm" })) { }
+<script>
+    var a = 0;
+    function OnChange(cb) {
+        if (cb.checked) {
+            a++;
+        }
+        else {
+            a--;
+        }
+        console.log(a);
+        if (a > 0) {
+            document.getElementById('submit').disabled = "";
+        }
+        else {
+            document.getElementById('submit').disabled = "disabled";
+        }
+
+    }
+</script>
+

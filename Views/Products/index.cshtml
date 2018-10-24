@@ -1,0 +1,61 @@
+﻿@model Home
+@{
+    ViewData["Title"] = "Home Page";
+}
+@using (Html.BeginForm("", "Products"))
+{
+    <div class="btn-toolbar nl container col-md-12" role="toolbar" aria-label="Menu">
+        <button type="submit" id="submit" class="btn-group col-md-2 col-md-offset-0" formaction=@Url.Action("Delete", "Products") disabled="disabled">Delete</button>
+        <button type="submit" id="Add" class="btn-group col-md-2 col-md-offset-0" formmethod="get" formaction=@Url.Action("Create", "Products")>Add new product</button>
+    </div>
+
+    <table class="table">
+        @foreach (var product in Model.Products)
+        {
+        <tr>
+            <td>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="SelectedItems" onchange="OnChange(this)"
+                               id="@product.Id" value="@product.Id" class="styled">
+                    </label>
+                </div>
+
+            <td>
+                <a asp-area="" asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="navbar-brand"> @product.Name</a>
+            </td>
+            <td>
+                @product.Count
+            </td>
+            <td>
+                @product.Price
+            </td>
+            <td>
+                @product.Description
+            </td>
+            <td>
+                @Model.Categories.FirstOrDefault(p => p.Id == product.CategoryId).Name
+            </td>
+        </tr>
+        }
+    </table>
+}
+<script>
+    var a = 0;
+    function OnChange(cb) {
+        if (cb.checked) {
+            a++;
+        }
+        else {
+            a--;
+        }
+        console.log(a);
+        if (a > 0) {
+            document.getElementById('submit').disabled = "";
+        }
+        else {
+            document.getElementById('submit').disabled = "disabled";
+        }
+
+    }
+</script>

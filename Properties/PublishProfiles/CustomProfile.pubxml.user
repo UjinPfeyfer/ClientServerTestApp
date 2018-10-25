@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAiZp/4KRlAEGb+aWEWx0v6gAAAAACAAAAAAAQZgAAAAEAACAAAABz1gRGQuCCvslGMKpxtWyApYgV6aNuad+QYfrcMbPOOgAAAAAOgAAAAAIAACAAAAC85UuV3AORxAkzekbwdov6oo5uNLlLnzbr6J2qLNUKlSAAAACuyZWD3XKDnD7MHmPJbdQMd4OB/KxQe+buCPT2bqXFskAAAADOFHFNfFff/YLwAZ5t7ngyRXKk+C9Ba4CQCcUvZ5BcOZac0CZDzIgdwq9TWUEVE/2+MaoUwkA1QTn98xnWN+ny</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Server=SQL6006.site4now.net%3bInitial Catalog=DB_A41D1A_Test%3bUser Id=DB_A41D1A_Test_admin%3bPassword=A1234567b%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="ClientServerTestApp.Data.ApplicationDbContext">
+      <Value>Server=SQL6006.site4now.net%3bInitial Catalog=DB_A41D1A_Test%3bUser Id=DB_A41D1A_Test_admin%3bPassword=A1234567b%3b</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

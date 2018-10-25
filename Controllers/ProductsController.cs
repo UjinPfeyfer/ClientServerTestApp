@@ -118,39 +118,46 @@ namespace ClientServerTestApp.Controllers
 
         public async Task<IActionResult> Upload(IFormFile file)
         {
-            StreamReader sr = new StreamReader(file.OpenReadStream());
-            string s;
-            try
+
+            StreamReader sr;
+            if (file != null)
             {
-                while ((s = sr.ReadLine()) != null)
+                sr = new StreamReader(file.OpenReadStream());
+
+                string s;
+                try
                 {
-                    string[] result = s.Split(',');
-                    if (result.Length == 5)
+                    while ((s = sr.ReadLine()) != null)
                     {
-                        _context.Products.Add(new Product()
+                        string[] result = s.Split(';');
+                        if (result.Length == 5)
                         {
-                            Name = result[0],
-                            Price = float.Parse(result[1]),
-                            Count = int.Parse(result[2]),
-                            Description = result[3],
-                            CategoryId = int.Parse(result[4])
-                        });
-                    }
-                    else
-                    {
-                        _context.Products.Add(new Product()
+                            _context.Products.Add(new Product()
+                            {
+                                Name = result[0],
+                                Price = float.Parse(result[1]),
+                                Count = int.Parse(result[2]),
+                                Description = result[3],
+                                CategoryId = int.Parse(result[4])
+                            });
+                        }
+                        else
                         {
-                            Name = result[0],
-                            Price = float.Parse(result[1]),
-                            Count = int.Parse(result[2]),
-                            CategoryId = int.Parse(result[3])
-                        });
+                            _context.Products.Add(new Product()
+                            {
+                                Name = result[0],
+                                Price = float.Parse(result[1]),
+                                Count = int.Parse(result[2]),
+                                CategoryId = int.Parse(result[3])
+                            });
+                        }
                     }
                 }
+
+                catch (Exception e)
+                { }
+                await _context.SaveChangesAsync();
             }
-            catch(Exception e)
-            { }
-            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
